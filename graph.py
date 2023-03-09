@@ -114,13 +114,13 @@ class Graph:
             return False
 
         for neighbor in self.__graph.get(rem_node1):
-            if neighbor[0] == rem_node1:
+            if neighbor[0] == rem_node2:
                 self.__graph.get(rem_node1).remove(neighbor)
 
         if not self.__directed:
             for neighbor in self.__graph.get(rem_node2):
-                if neighbor[0] == rem_node2:
-                    self.__graph.get(rem_2node2).remove(neighbor)
+                if neighbor[0] == rem_node1:
+                    self.__graph.get(rem_node2).remove(neighbor)
 
         return True
 

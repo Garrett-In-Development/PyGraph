@@ -98,6 +98,8 @@ class Graph:
         return rem_node
 
     def remove_edge(self, node1, node2):
+        rem_node1 = None
+        rem_node2 = None
         if isinstance(node1, Node):
             rem_node1 = self.get_node(node1.get_value())
         else:
@@ -108,14 +110,19 @@ class Graph:
         else:
             rem_node2 = self.get_node(node2)
 
-        for neighbor in self.__graph.get(node1):
-            if neighbor[0] == node1:
-                self.__graph.get(node1).remove(neighbor)
+        if rem_node1 is None or rem_node2 is None:
+            return False
+
+        for neighbor in self.__graph.get(rem_node1):
+            if neighbor[0] == rem_node1:
+                self.__graph.get(rem_node1).remove(neighbor)
 
         if not self.__directed:
-            for neighbor in self.__graph.get(node2):
-                if neighbor[0] == node2:
-                    self.__graph.get(node2).remove(neighbor)
+            for neighbor in self.__graph.get(rem_node2):
+                if neighbor[0] == rem_node2:
+                    self.__graph.get(rem_2node2).remove(neighbor)
+
+        return True
 
 
     def read_graph(self, fileName):

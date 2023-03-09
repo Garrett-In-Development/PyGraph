@@ -25,7 +25,7 @@ class Graph:
         for node in self.__graph.keys():
             try:
                 if node_name == node.get_value():
-                return node
+                    return node
             except TypeError:
                 continue
 
@@ -96,6 +96,26 @@ class Graph:
         del self.__graph[rem_node]
 
         return rem_node
+
+    def remove_edge(self, node1, node2):
+        if isinstance(node1, Node):
+            rem_node1 = self.get_node(node1.get_value())
+        else:
+            rem_node1 = self.get_node(node1)
+
+        if isinstance(node2, Node):
+            rem_node2 = self.get_node(node2.get_value())
+        else:
+            rem_node2 = self.get_node(node2)
+
+        for neighbor in self.__graph.get(node1):
+            if neighbor[0] == node1:
+                self.__graph.get(node1).remove(neighbor)
+
+        if not self.__directed:
+            for neighbor in self.__graph.get(node2):
+                if neighbor[0] == node2:
+                    self.__graph.get(node2).remove(neighbor)
 
 
     def read_graph(self, fileName):
